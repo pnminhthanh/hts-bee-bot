@@ -1,12 +1,26 @@
 const TelegramBot = require("node-telegram-bot-api");
+const express = require("express");
 
-// Thay YOUR_API_TOKEN bằng API Token bạn lấy từ BotFather
 const token = "7837982459:AAE1bk8saRV30PwNg5yV-c77JZvBHBOC63o";
-
-// Tạo bot với chế độ "polling" (liên tục lắng nghe)
 const bot = new TelegramBot(token, { polling: true });
 
-// Xử lý khi người dùng gõ lệnh /start
+const app = express();
+
+app.use(express.json());
+
+app.post(`/bot${token}`, (req, res) => {
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+const webhookUrl = `https://hts-bee-bot.onrender.com/bot${token}`;
+bot.setWebHook(webhookUrl);
+
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   bot.sendMessage(
