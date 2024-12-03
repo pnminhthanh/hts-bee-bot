@@ -48,20 +48,14 @@ bot.onText(/\/start/, (msg) => {
     });
 });
 
-bot.on("message", (msg) => {
+bot.on("new_chat_members", (msg) => {
   const chatId = msg.chat.id;
-  const text = msg.text;
-  console.log("Received message:", msg);
+  const newMembers = msg.new_chat_members;
 
-  const isBotMentioned =
-    text &&
-    msg.bot &&
-    msg.bot.username &&
-    text.includes(`@${msg.bot.username}`);
-
-  if (isBotMentioned) {
-    bot.sendMessage(chatId, `Bạn vừa nhắc tôi: "${text}"`).catch((error) => {
-      console.error("Error sending mention response:", error);
-    });
-  }
+  newMembers.forEach((member) => {
+    bot.sendMessage(
+      chatId,
+      `Chào mừng ${member.first_name} đến với The Honeycomb Riches Squad! Hãy làm giàu cùng nhau nhé 🎉`
+    );
+  });
 });
