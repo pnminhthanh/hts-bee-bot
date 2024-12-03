@@ -53,7 +53,13 @@ bot.on("message", (msg) => {
   const text = msg.text;
   console.log("Received message:", msg);
 
-  if (text && text.includes(`@${msg.bot.username}`)) {
+  const isBotMentioned =
+    text &&
+    msg.bot &&
+    msg.bot.username &&
+    text.includes(`@${msg.bot.username}`);
+
+  if (isBotMentioned) {
     bot.sendMessage(chatId, `Bạn vừa nhắc tôi: "${text}"`).catch((error) => {
       console.error("Error sending mention response:", error);
     });
