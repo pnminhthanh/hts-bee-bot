@@ -1,16 +1,27 @@
 {
   "name": "hts-bee-bot",
-  "version": "1.0.0",
-  "description": "HTS Bee Bot",
-  "main": "bot.js",
+  "version": "1.1.0",
+  "description": "HTS Bee Bot - Telegram Crypto Bot",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node src/server.js",
+    "build": "echo 'Nothing to build, ready to deploy!'",
+    "dev": "nodemon src/server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "telegram",
+    "crypto",
+    "bot"
+  ],
   "author": "Thanh Pham",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.1",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^0.66.0",
+    "axios": "^1.5.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
